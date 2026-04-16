@@ -728,10 +728,6 @@ function buildCampTable(){
     <thead><tr><th style="width:20px"></th><th>Campanha</th><th class="num">Invest.</th><th class="num">Conv.</th><th class="num">CPL</th><th class="num">CPM</th><th class="num">CTR</th></tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 
-  data.forEach((c,i)=>{
-    const cid=`c${ym.replace('-','')}${i}`;
-    drawSpk(`spk-${cid}`, c.spk);
-  });
 }
 
 function toggleC(id){
