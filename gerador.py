@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Laboratório Bem Me Quer — Gerador automático do Dashboard
+Dashboard — Gerador automático do Dashboard
 Meta Ads + Google Ads — 4 painéis completos
 """
 
@@ -658,7 +658,7 @@ def inject_all(template_path,
 
 def main():
     print("=" * 60)
-    print("Laboratório Bem Me Quer — Dashboard Meta + Google Ads")
+    print("Dashboard")
     print("=" * 60)
 
     # ── META ──────────────────────────────────────────────────
