@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gerador automático do Dashboard
+Laboratório Bem Me Quer — Gerador automático do Dashboard
 Meta Ads + Google Ads — 4 painéis completos
 """
 
@@ -98,12 +98,26 @@ def load_meta():
         "Spend (Cost, Amount Spent)": "spend",
         "Impressions": "impressions", "Clicks": "clicks",
         "Action Link Clicks": "link_clicks",
-        "Action Messaging Conversations Started (Onsite Conversion)": "leads",
     })
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    for c in ["spend", "leads", "impressions", "clicks", "link_clicks"]:
+    for c in ["spend", "impressions", "clicks", "link_clicks"]:
         if c in df.columns:
             df[c] = to_num(df[c])
+
+    # Somar todas as colunas de conversão disponíveis (sem dupla contagem)
+    CONV_COLS = [
+        "Action Messaging Conversations Started (Onsite Conversion)",
+        "Action Leads",
+        "Conversion Contact Total",
+        "Action FB Pixel Complete Registration (Offsite Conversion)",
+        "Action FB Pixel Lead (Offsite Conversion)",
+    ]
+    conv_present = [c for c in CONV_COLS if c in df.columns]
+    if conv_present:
+        df["leads"] = sum(to_num(df[c]) for c in conv_present)
+    else:
+        df["leads"] = 0.0
+    print(f"     Colunas de conversão usadas: {conv_present}")
     df["ym"] = df["date"].dt.to_period("M")
     df = df.dropna(subset=["date"])
     print(f"     {len(df)} linhas | {df['date'].min().date()} → {df['date'].max().date()}")
@@ -280,7 +294,15 @@ def load_meta_ga():
     df = pd.read_csv(URL_META_GA)
     df["date"] = pd.to_datetime(df["Date"], errors="coerce")
     df["spend"] = to_num(df["Spend (Cost, Amount Spent)"])
-    df["leads"] = to_num(df["Action Messaging Conversations Started (Onsite Conversion)"])
+    CONV_COLS_GA = [
+        "Action Messaging Conversations Started (Onsite Conversion)",
+        "Action Leads",
+        "Conversion Contact Total",
+        "Action FB Pixel Complete Registration (Offsite Conversion)",
+        "Action FB Pixel Lead (Offsite Conversion)",
+    ]
+    conv_ga = [c for c in CONV_COLS_GA if c in df.columns]
+    df["leads"] = sum(to_num(df[c]) for c in conv_ga) if conv_ga else 0.0
     df["impressions"] = to_num(df["Impressions"])
     df["age"] = df["Age (Breakdown)"].astype(str)
     df["gender"] = df["Gender (Breakdown)"].astype(str)
@@ -292,7 +314,15 @@ def load_meta_pt():
     df = pd.read_csv(URL_META_PT)
     df["date"] = pd.to_datetime(df["Date"], errors="coerce")
     df["spend"] = to_num(df["Spend (Cost, Amount Spent)"])
-    df["leads"] = to_num(df["Action Messaging Conversations Started (Onsite Conversion)"])
+    CONV_COLS_PT = [
+        "Action Messaging Conversations Started (Onsite Conversion)",
+        "Action Leads",
+        "Conversion Contact Total",
+        "Action FB Pixel Complete Registration (Offsite Conversion)",
+        "Action FB Pixel Lead (Offsite Conversion)",
+    ]
+    conv_pt = [c for c in CONV_COLS_PT if c in df.columns]
+    df["leads"] = sum(to_num(df[c]) for c in conv_pt) if conv_pt else 0.0
     df["impressions"] = to_num(df["Impressions"])
     df["platform"] = df["Platform Position (Breakdown)"]
     return df.dropna(subset=["date"])
