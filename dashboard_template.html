@@ -856,6 +856,10 @@ function buildGeralCampTable(){
       <td class="num">${fR(c.spend)}</td>
       <td class="num">${fN(c.leads)}</td>
       <td class="num ${cls(c.cpl)}">${fR(c.cpl)}</td>
+      <td class="num" style="color:var(--muted2)">${c.imp>0?fN(c.imp):'—'}</td>
+      <td class="num" style="color:var(--muted2)">${c.clicks>0?fN(c.clicks):'—'}</td>
+      <td class="num">${c.ctr!=null?c.ctr.toFixed(2)+'%':'—'}</td>
+      <td class="num" style="color:var(--muted2)">${fR(c.cpm)}</td>
     </tr>`).join('')}</tbody></table>`;
 }
 
@@ -881,6 +885,10 @@ function buildGeralPubTable(){
       <td class="num">${fR(a.spend)}</td>
       <td class="num">${fN(a.leads)}</td>
       <td class="num ${cls(a.cpl)}">${fR(a.cpl)}</td>
+      <td class="num" style="color:var(--muted2)">${a.imp>0?fN(a.imp):'—'}</td>
+      <td class="num" style="color:var(--muted2)">${a.clicks>0?fN(a.clicks):'—'}</td>
+      <td class="num">${a.ctr!=null?a.ctr.toFixed(2)+'%':'—'}</td>
+      <td class="num" style="color:var(--muted2)">${fR(a.cpm)}</td>
     </tr>`).join('')}</tbody></table>`;
 }
 
@@ -1372,6 +1380,10 @@ function buildGGeralCampTable(){
       <td class="num">${fGC(c.conv)}</td>
       <td class="num ${gcls(c.cpl)}">${fR(c.cpl)}</td>
       <td class="num">${fR(c.cpc)}</td>
+      <td class="num" style="color:var(--muted2)">${c.imp>0?fN(c.imp):'—'}</td>
+      <td class="num" style="color:var(--muted2)">${c.clicks>0?fN(c.clicks):'—'}</td>
+      <td class="num">${c.clicks>0&&c.imp>0?(c.clicks/c.imp*100).toFixed(2)+'%':'—'}</td>
+      <td class="num" style="color:var(--muted2)">${c.imp>0?fR(c.spend/c.imp*1000):'—'}</td>
     </tr>`).join('')}</tbody></table>`;
 }
 
@@ -1398,6 +1410,10 @@ function buildGGeralGrpTable(){
       <td class="num">${fGC(a.conv)}</td>
       <td class="num ${gcls(a.cpl)}">${fR(a.cpl)}</td>
       <td class="num">${fR(a.cpc)}</td>
+      <td class="num" style="color:var(--muted2)">${a.imp>0?fN(a.imp):'—'}</td>
+      <td class="num" style="color:var(--muted2)">${a.clicks>0?fN(a.clicks):'—'}</td>
+      <td class="num">${a.clicks>0&&a.imp>0?(a.clicks/a.imp*100).toFixed(2)+'%':'—'}</td>
+      <td class="num" style="color:var(--muted2)">${a.imp>0?fR(a.spend/a.imp*1000):'—'}</td>
     </tr>`).join('')}</tbody></table>`;
 }
 
