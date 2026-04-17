@@ -21,7 +21,7 @@ TEMPLATE_FILE = "dashboard_template.html"
 OUTPUT_FILE   = "index.html"
 
 NOME_CLIENTE  = "Polvo"  # aparece na sidebar e no <title>
-LOGO_LETRA    = "B"      # letra dentro do ícone na sidebar
+LOGO_LETRA    = "P"      # letra dentro do ícone na sidebar
 COR_ACENTO    = "#7c3aed"  # cor principal: sidebar ativa, badge, período (ex: "#1877f2", "#e11d48")
 GOOGLE_ADS    = False    # False = painel Google oculto (cliente só Meta)
 
