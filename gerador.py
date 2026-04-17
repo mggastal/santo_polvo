@@ -24,6 +24,7 @@ NOME_CLIENTE  = "Polvo"  # aparece na sidebar e no <title>
 LOGO_LETRA    = "P"      # letra dentro do ícone na sidebar
 COR_ACENTO    = "#7c3aed"  # cor principal: sidebar ativa, badge, período (ex: "#1877f2", "#e11d48")
 GOOGLE_ADS    = False    # False = painel Google oculto (cliente só Meta)
+META_ADS      = True     # False = painel Meta oculto (cliente só Google)
 
 # Metas de CPL — Meta Ads
 META_CPL_BOM    = 14    # ≤ este valor → verde
@@ -668,6 +669,12 @@ def inject_all(template_path,
         rf'\g<1>{GOOGLE_CPL_MEDIO}', html, count=1
     )
 
+    # Meta ADS visibility flag
+    if META_ADS:
+        html = html.replace('const META_ATIVO=false;', 'const META_ATIVO=true;')
+    else:
+        html = html.replace('const META_ATIVO=true;', 'const META_ATIVO=false;')
+
     # Logo letra e cor de acento
     html = re.sub(r"const LOGO_LETRA='[^']*'", f"const LOGO_LETRA='{LOGO_LETRA}'", html, count=1)
     html = re.sub(r"const COR_ACENTO='[^']*'", f"const COR_ACENTO='{COR_ACENTO}'", html, count=1)
@@ -698,34 +705,45 @@ def main():
     print("=" * 60)
 
     # ── META ──────────────────────────────────────────────────
-    print("\n[META ADS]")
-    df_meta = load_meta()
-    all_months_meta = sorted(df_meta["ym"].unique())
-
-    print("  Diário...")
-    m_daily, m_last, m_all_days = meta_daily(df_meta)
-    print(f"     {len(m_daily['days'])} dias | último: {m_last}")
-
-    print("  KPIs...")
-    m_kpis = meta_kpis(df_meta, m_all_days)
-
-    print("  Mensal...")
-    m_monthly = meta_monthly(df_meta)
-
-    print("  Campanhas...")
-    m_camps = meta_camps(df_meta, m_all_days)
-
-    m_mes_days = meta_mes_days(df_meta)
-
-    print("  Criativos...")
     img_dir = Path("imgs")
     img_dir.mkdir(exist_ok=True)
-    m_ads = meta_ads(df_meta, img_dir, m_all_days)
+    if META_ADS:
+        print("\n[META ADS]")
+        df_meta = load_meta()
+        all_months_meta = sorted(df_meta["ym"].unique())
 
-    print("  Breakdowns...")
-    df_meta_ga = load_meta_ga()
-    df_meta_pt = load_meta_pt()
-    m_bd = meta_breakdowns(df_meta_ga, df_meta_pt, m_all_days, all_months_meta)
+        print("  Diário...")
+        m_daily, m_last, m_all_days = meta_daily(df_meta)
+        print(f"     {len(m_daily['days'])} dias | último: {m_last}")
+
+        print("  KPIs...")
+        m_kpis = meta_kpis(df_meta, m_all_days)
+
+        print("  Mensal...")
+        m_monthly = meta_monthly(df_meta)
+
+        print("  Campanhas...")
+        m_camps = meta_camps(df_meta, m_all_days)
+
+        m_mes_days = meta_mes_days(df_meta)
+
+        print("  Criativos...")
+        m_ads = meta_ads(df_meta, img_dir, m_all_days)
+
+        print("  Breakdowns...")
+        df_meta_ga = load_meta_ga()
+        df_meta_pt = load_meta_pt()
+        m_bd = meta_breakdowns(df_meta_ga, df_meta_pt, m_all_days, all_months_meta)
+    else:
+        print("\n[META ADS] desativado")
+        m_daily   = {"days":[],"spend":[],"leads":[],"cpl":[],"ctr":[],"cpm":[]}
+        m_last    = "—"
+        m_monthly = {"meses":[],"lbl":[],"totalS":[],"totalL":[],"cplG":[],"cpmG":[],"ctrG":[]}
+        m_camps   = {}
+        m_mes_days= {}
+        m_kpis    = {}
+        m_ads     = {}
+        m_bd      = {}
 
     # ── GOOGLE ────────────────────────────────────────────────
     if GOOGLE_ADS:
