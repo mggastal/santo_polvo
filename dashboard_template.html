@@ -309,7 +309,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="page-section" id="page-geral">
       <div style="margin-bottom:16px;">
         <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;">Dados Gerais da Conta</div>
-        <div style="font-size:12px;color:var(--muted);">Análise histórica Jan/2026 – Abr/2026 · dados reais da planilha</div>
+        <div style="font-size:12px;color:var(--muted);" id="metaHistoricaRange">Análise histórica · dados reais da planilha</div>
       </div>
       <div class="kpi-strip" id="geralKpis"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
@@ -407,7 +407,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="page-section" id="page-ggeral">
       <div style="margin-bottom:16px;">
         <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;">Google Ads — Dados Gerais</div>
-        <div style="font-size:12px;color:var(--muted);">Análise histórica Jun/2025 – Mar/2026 · dados reais</div>
+        <div style="font-size:12px;color:var(--muted);" id="googleHistoricaRange">Análise histórica · dados reais</div>
       </div>
       <div class="kpi-strip" id="gGeralKpis"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
@@ -991,6 +991,22 @@ render();
     if(lastDay){
       var el=document.getElementById('liveBadgeDate');
       if(el) el.textContent='Dados até '+lastDay;
+    }
+  })();
+
+  // Atualiza textos de análise histórica dinamicamente
+  (function(){
+    // Meta: pegar primeiro e último mês de MONTHLY
+    if(MONTHLY.lbl&&MONTHLY.lbl.length){
+      var first=MONTHLY.lbl[0], last=MONTHLY.lbl[MONTHLY.lbl.length-1];
+      var el=document.getElementById('metaHistoricaRange');
+      if(el) el.textContent='Análise histórica '+first+' – '+last+' · dados reais da planilha';
+    }
+    // Google: pegar primeiro e último mês de GMONTHLY
+    if(GMONTHLY.lbl&&GMONTHLY.lbl.length){
+      var gfirst=GMONTHLY.lbl[0], glast=GMONTHLY.lbl[GMONTHLY.lbl.length-1];
+      var gel=document.getElementById('googleHistoricaRange');
+      if(gel) gel.textContent='Análise histórica '+gfirst+' – '+glast+' · dados reais';
     }
   })();
   // Aplica letra do logo
