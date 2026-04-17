@@ -154,13 +154,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   .content{padding:12px;}
   .tc{overflow-x:auto;}
   .tc table{min-width:100%;width:max-content;}
+  #tGeralCamp,#tGeralPub,#tGGeralCamp,#tGGeralGrp,#tGGeralKw{overflow-x:auto;display:block;}
+  #tGeralCamp table,#tGeralPub table,#tGGeralCamp table,#tGGeralGrp table,#tGGeralKw table{min-width:100%;width:max-content;border-collapse:collapse;}
   .tc thead th,.tc tbody td{padding:6px 8px;white-space:nowrap;}
 }
-@media(min-width:769px){.mob-menu{display:none;}.mob-nav{display:none;}}
-.mob-nav{display:none;background:var(--surface);border-bottom:1px solid var(--border);padding:6px 12px;gap:6px;z-index:99;}
-@media(max-width:768px){.mob-nav{display:flex;}}
-.mob-nav-btn{flex:1;padding:7px 10px;border-radius:8px;border:none;background:var(--surface2);cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all .15s;}
-.mob-nav-btn.active{background:#0f1523;color:#fff;}
+@media(min-width:769px){.mob-menu{display:none;}}
+
 
 .sb-platform-group{padding:4px 4px 0;}
 .sb-platform-hd{display:flex;align-items:center;gap:8px;padding:6px 10px 4px;margin-bottom:2px;}
@@ -246,12 +245,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       </label>
     </div>
   </div>
-  <div class="mob-nav" id="mobNav">
-    <button class="mob-nav-btn active" id="mobBtnDash" onclick="showPage('dash',this);updateMobNav('dash')">Meta 📊</button>
-    <button class="mob-nav-btn" id="mobBtnGeral" onclick="showPage('geral',this);updateMobNav('geral')">Meta 📋</button>
-    <button class="mob-nav-btn" id="mobBtnGDash" onclick="showPage('gdash',this);updateMobNav('gdash')">G 📊</button>
-    <button class="mob-nav-btn" id="mobBtnGGeral" onclick="showPage('ggeral',this);updateMobNav('ggeral')">G 📋</button>
-  </div>
+
   <div class="content">
     <!-- DASHBOARD PAGE -->
     <div class="page-section active" id="page-dash">
@@ -491,6 +485,7 @@ const CONFIG = {
 };
 
 const GOOGLE_ATIVO=true; // controlado pelo gerador.py
+const META_ATIVO=true; // controlado pelo gerador.py
 const LOGO_LETRA='?'; // controlado pelo gerador.py
 const COR_ACENTO='#334155'; // controlado pelo gerador.py
 const NOME_CLIENTE='Cliente'; // controlado pelo gerador.py
@@ -956,10 +951,7 @@ function toggleTheme(){
 })();
 
 function updateMobNav(p){
-  ['Dash','Geral','GDash','GGeral'].forEach(k=>{
-    const el=document.getElementById('mobBtn'+k);
-    if(el)el.classList.toggle('active',p===k.toLowerCase());
-  });
+  // mob-nav removido — navegação via sidebar
 }
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
@@ -1028,6 +1020,23 @@ render();
   });
   // Esconde period bars Google
   ['pbGDash','pbGGeral'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none!important';
+  });
+})();
+
+(function(){
+  if(META_ATIVO) return;
+  // Esconde grupos Meta na sidebar
+  document.querySelectorAll('.sb-platform-group').forEach(g=>{
+    if(g.querySelector('.sb-platform-lbl') &&
+       g.querySelector('.sb-platform-lbl').textContent.trim()==='Meta Ads')
+      g.style.display='none';
+  });
+  // Redireciona página inicial para Google
+  showPage('gdash', document.querySelector('[data-page="gdash"]'));
+  // Esconde period bars Meta
+  ['pbDash','pbGeral'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.style.display='none!important';
   });
