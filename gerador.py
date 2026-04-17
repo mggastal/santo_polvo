@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dashboard — Gerador automático do Dashboard
+Gerador automático do Dashboard
 Meta Ads + Google Ads — 4 painéis completos
 """
 
@@ -21,6 +21,8 @@ TEMPLATE_FILE = "dashboard_template.html"
 OUTPUT_FILE   = "index.html"
 
 NOME_CLIENTE  = "Polvo"  # aparece na sidebar e no <title>
+LOGO_LETRA    = "B"      # letra dentro do ícone na sidebar
+COR_ACENTO    = "#7c3aed"  # cor principal: sidebar ativa, badge, período (ex: "#1877f2", "#e11d48")
 GOOGLE_ADS    = False    # False = painel Google oculto (cliente só Meta)
 
 # Metas de CPL — Meta Ads
@@ -28,8 +30,8 @@ META_CPL_BOM    = 14    # ≤ este valor → verde
 META_CPL_MEDIO  = 20    # ≤ este valor → amarelo  |  acima → vermelho
 
 # Metas de CPL — Google Ads
-GOOGLE_CPL_BOM   = 15   # ≤ este valor → verde
-GOOGLE_CPL_MEDIO = 20   # ≤ este valor → amarelo  |  acima → vermelho
+GOOGLE_CPL_BOM   = 10   # ≤ este valor → verde
+GOOGLE_CPL_MEDIO = 30   # ≤ este valor → amarelo  |  acima → vermelho
 
 # ══════════════════════════════════════════════════════════════════════════════
 # NÃO PRECISA MEXER ABAIXO DESTA LINHA
@@ -224,11 +226,11 @@ def meta_camps_period(df, p, all_months, cur_ym_str):
                 th = str(th_rows.iloc[0]) if len(th_rows)>0 else ""
                 if th == "nan": th = ""
                 anuncios.append({"n":str(ad["ad"]),"spend":round(float(ad["spend"]),2),"leads":int(ad["leads"]),
-                    "cpl":safe(ad["cpl"]),"cpm":safe(ad["cpm"]),"ctr":safe(ad["ctr"]),"thumb":th})
+                    "cpl":safe(ad["cpl"]),"cpm":safe(ad["cpm"]),"ctr":safe(ad["ctr"]),"imp":int(ad["impressions"]),"clicks":int(ad["link_clicks"]),"thumb":th})
             conjs.append({"n":str(a["adset"]),"spend":round(float(a["spend"]),2),"leads":int(a["leads"]),
-                "cpl":safe(a["cpl"]),"cpm":safe(a["cpm"]),"ctr":safe(a["ctr"]),"ads":anuncios})
+                "cpl":safe(a["cpl"]),"cpm":safe(a["cpm"]),"ctr":safe(a["ctr"]),"imp":int(a["impressions"]),"clicks":int(a["link_clicks"]),"ads":anuncios})
         out.append({"n":str(r["campaign"]),"spend":round(float(r["spend"]),2),"leads":int(r["leads"]),
-            "cpl":safe(r["cpl"]),"cpm":safe(r["cpm"]),"ctr":safe(r["ctr"]),"spk":spk,"conjs":conjs})
+            "cpl":safe(r["cpl"]),"cpm":safe(r["cpm"]),"ctr":safe(r["ctr"]),"imp":int(r["impressions"]),"clicks":int(r["link_clicks"]),"spk":spk,"conjs":conjs})
     return out
 
 
@@ -472,10 +474,10 @@ def google_camps_period(df, p, all_months, cur_ym_str):
                     "cpl":safe(k["cpl"]),"cpc":safe(k["cpc"]),"clicks":int(k["clicks"])})
             conjs.append({"n":str(ag["adgroup"]),"spend":round(float(ag["spend"]),2),
                 "conv":round(float(ag["conversions"]),2),"cpl":safe(ag["cpl"]),"cpc":safe(ag["cpc"]),
-                "ctr":safe(ag["ctr"]),"clicks":int(ag["clicks"]),"keywords":kw_list})
+                "ctr":safe(ag["ctr"]),"clicks":int(ag["clicks"]),"imp":int(ag["impressions"]),"keywords":kw_list})
         out.append({"n":str(r["campaign"]),"spend":round(float(r["spend"]),2),
             "conv":round(float(r["conversions"]),2),"cpl":safe(r["cpl"]),"cpc":safe(r["cpc"]),
-            "ctr":safe(r["ctr"]),"clicks":int(r["clicks"]),"spk":spk,"adgroups":conjs})
+            "ctr":safe(r["ctr"]),"clicks":int(r["clicks"]),"imp":int(r["impressions"]),"spk":spk,"adgroups":conjs})
     return out
 
 
@@ -636,6 +638,10 @@ def inject_all(template_path,
         rf'\g<1>{GOOGLE_CPL_MEDIO}', html, count=1
     )
 
+    # Logo letra e cor de acento
+    html = re.sub(r"const LOGO_LETRA='[^']*'", f"const LOGO_LETRA='{LOGO_LETRA}'", html, count=1)
+    html = re.sub(r"const COR_ACENTO='[^']*'", f"const COR_ACENTO='{COR_ACENTO}'", html, count=1)
+
     # Nome do cliente
     html = re.sub(r"const NOME_CLIENTE='[^']*'", f"const NOME_CLIENTE='{NOME_CLIENTE}'", html, count=1)
 
@@ -658,7 +664,7 @@ def inject_all(template_path,
 
 def main():
     print("=" * 60)
-    print("Dashboard")
+    print("Laboratório Bem Me Quer — Dashboard Meta + Google Ads")
     print("=" * 60)
 
     # ── META ──────────────────────────────────────────────────
