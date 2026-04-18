@@ -1,422 +1,55 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Santo Criativo — Visão Geral</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ── DARK (padrão) ── */
-:root{
-  --bg:#0a0d14;
-  --surface:#111520;
-  --surface2:#181d2a;
-  --surface3:#1e2535;
-  --border:rgba(255,255,255,0.07);
-  --text:#f0f4ff;
-  --muted:#8b95a9;
-  --muted2:#4a5568;
-  --accent:#e11d48;
-  --sh:0 2px 12px rgba(0,0,0,.4);
-  --r:14px;
-}
-/* ── LIGHT ── */
-[data-theme="light"]{
-  --bg:#f0f2f7;
-  --surface:#ffffff;
-  --surface2:#f7f8fc;
-  --surface3:#eef0f5;
-  --border:rgba(0,0,0,0.07);
-  --text:#0f1523;
-  --muted:#6b7280;
-  --muted2:#9ca3af;
-  --sh:0 1px 6px rgba(0,0,0,.08);
-}
-[data-theme="light"] .header{background:#fff;}
-[data-theme="light"] .sum-card::after{opacity:.8;}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;transition:background .2s,color .2s;}
-
-/* ── HEADER ── */
-.header{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface);}
-.brand{display:flex;align-items:center;gap:11px;}
-.brand-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#e11d48,#f43f5e);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;}
-.brand-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;}
-.brand-sub{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;}
-
-.header-right{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.sync-pill{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px;padding:4px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;}
-.sync-dot{width:5px;height:5px;border-radius:50%;background:#10b981;flex-shrink:0;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-.period-bar{display:flex;gap:3px;background:var(--surface2);padding:3px;border-radius:9px;border:1px solid var(--border);}
-.pb{padding:5px 11px;border-radius:7px;border:none;background:transparent;cursor:pointer;font-size:11px;font-weight:600;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;}
-.pb.active{background:var(--accent);color:#fff;}
-
-.theme-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:11px;font-weight:600;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;}
-.theme-btn:hover{color:var(--text);}
-
-/* ── MAIN ── */
-.main{padding:20px 28px;}
-
-/* ── SUMMARY ── */
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
-.sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;position:relative;overflow:hidden;}
-.sum-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);}
-.sum-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:5px;}
-.sum-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;}
-.sum-sub{font-size:10px;color:var(--muted);margin-top:2px;}
-
-/* ── SECTION ── */
-.section-hd{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
-
-/* ── TABLE HEADER ── */
-.clients-header{
-  display:grid;
-  grid-template-columns:200px 1fr 1fr 120px 120px 76px;
-  gap:12px;padding:0 20px 10px;
-  font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;font-weight:700;
-}
-
-/* ── CLIENT CARD ── */
-.clients-grid{display:flex;flex-direction:column;gap:9px;}
-.client-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
-  padding:18px 20px;
-  display:grid;grid-template-columns:200px 1fr 1fr 120px 120px 76px;
-  align-items:center;gap:12px;
-  transition:border-color .15s,box-shadow .15s;
-}
-.client-card:hover{border-color:rgba(255,255,255,.13);box-shadow:var(--sh);}
-[data-theme="light"] .client-card:hover{border-color:rgba(0,0,0,.1);}
-.client-card.error{border-color:rgba(239,68,68,.2);}
-
-.client-info{display:flex;align-items:center;gap:10px;}
-.client-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
-.client-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
-.client-updated{font-size:10px;color:var(--muted);margin-top:2px;}
-
-/* ── KPI BLOCKS ── */
-.kpi-block,.cpl-block{display:flex;flex-direction:column;gap:4px;align-items:center;}
-.kpi-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:600;}
-.kpi-row,.cpl-row{display:flex;align-items:center;gap:5px;justify-content:center;}
-.plat{font-size:8px;padding:1px 4px;border-radius:3px;font-weight:700;flex-shrink:0;line-height:1.5;}
-.mp{background:rgba(24,119,242,.15);color:#60a5fa;}
-.gp{background:rgba(251,188,4,.15);color:#fbbf24;}
-.kpi-num{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;}
-.cpl-val{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;}
-.na{font-size:10px;color:var(--muted2);}
-
-/* ── CPL COLORS ── */
-.cg{color:#10b981;} .cw2{color:#f59e0b;} .cr{color:#ef4444;} .cn{color:var(--muted);}
-
-/* ── LINK ── */
-.link-btn{display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 11px;border-radius:7px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:600;text-decoration:none;transition:all .15s;white-space:nowrap;}
-.link-btn:hover{border-color:var(--accent);color:var(--accent);}
-
-/* ── SKELETON ── */
-.skel{height:11px;border-radius:4px;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;display:inline-block;}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.err-msg{font-size:9px;color:#ef4444;font-style:italic;}
-
-/* ── FOOTER ── */
-.footer{padding:14px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-.footer-txt{font-size:10px;color:var(--muted2);}
-
-/* ── RESPONSIVE ── */
-@media(max-width:960px){
-  .summary{grid-template-columns:repeat(2,1fr);}
-  .clients-header{display:none;}
-  .client-card{grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;}
-  .client-info{grid-column:1/-1;}
-  .client-card>:last-child{justify-self:end;}
-}
-@media(max-width:560px){
-  .main{padding:12px 14px;}
-  .header{padding:12px 14px;}
-  .summary{grid-template-columns:1fr 1fr;}
-  .client-card{grid-template-columns:1fr 1fr;}
-  .client-info{grid-column:1/-1;}
-}
-</style>
-</head>
-<body>
-
-<div class="header">
-  <div class="brand">
-    <div class="brand-icon">S</div>
-    <div>
-      <div class="brand-name">Santo Criativo</div>
-      <div class="brand-sub">Painel da Agência</div>
-    </div>
-  </div>
-  <div class="header-right">
-    <div class="sync-pill">
-      <div class="sync-dot"></div>
-      <span id="lastSync">Carregando...</span>
-    </div>
-    <div class="period-bar">
-      <button class="pb" onclick="setPeriod(1,this)">Ontem</button>
-      <button class="pb" onclick="setPeriod(7,this)">7d</button>
-      <button class="pb" onclick="setPeriod(14,this)">14d</button>
-      <button class="pb active" onclick="setPeriod(30,this)">30d</button>
-    </div>
-    <button class="theme-btn" onclick="toggleTheme()">
-      <span id="themeIcon">☀️</span><span id="themeLabel">Claro</span>
-    </button>
-  </div>
-</div>
-
-<div class="main">
-  <div class="summary">
-    <div class="sum-card"><div class="sum-lbl">Invest. Total</div><div class="sum-val" id="sumSpend">—</div><div class="sum-sub">todos os clientes</div></div>
-    <div class="sum-card"><div class="sum-lbl">Total Leads</div><div class="sum-val" id="sumLeads">—</div><div class="sum-sub">todos os clientes</div></div>
-    <div class="sum-card"><div class="sum-lbl">CPL Médio</div><div class="sum-val" id="sumCPL">—</div><div class="sum-sub">ponderado por leads</div></div>
-    <div class="sum-card"><div class="sum-lbl">Clientes Ativos</div><div class="sum-val" id="sumAtivos">—</div><div class="sum-sub">com dados no período</div></div>
-  </div>
-
-  <div class="section-hd">Clientes</div>
-  <div class="clients-header">
-    <div>Cliente</div>
-    <div style="text-align:center">Investimento</div>
-    <div style="text-align:center">Leads</div>
-    <div style="text-align:center">CPL Meta</div>
-    <div style="text-align:center">CPL Google</div>
-    <div></div>
-  </div>
-  <div class="clients-grid" id="clientsGrid"></div>
-</div>
-
-<div class="footer">
-  <div class="footer-txt">Santo Criativo © 2026 — Dados atualizados diariamente às 06:00 BRT</div>
-  <div class="footer-txt" id="footerPeriod"></div>
-</div>
-
-<script>
-// ═══════════════════════════════════════════════════════════
-// CONFIGURAÇÃO — para adicionar um cliente, copie um bloco
-// ═══════════════════════════════════════════════════════════
-const CLIENTES = [
-  {
-    nome: "Polvo",
-    url:  "https://mggastal.github.io/santo_polvo/data.json",
-    dash: "https://mggastal.github.io/santo_polvo/",
-  },
-  {
-    nome: "Bem Me Quer",
-    url:  "https://mggastal.github.io/santo_bemmequer/data.json",
-    dash: "https://mggastal.github.io/santo_bemmequer/",
-  },
-  {
-    nome: "MCI",
-    url:  "https://mggastal.github.io/santo_mci/data.json",
-    dash: "https://mggastal.github.io/santo_mci/",
-  },
-  {
-    nome: "Girão",
-    url:  "https://mggastal.github.io/santo_girao/data.json",
-    dash: "https://mggastal.github.io/santo_girao/",
-  },
-];
-
-// ═══ ESTADO ══════════════════════════════
-let period = 30;
-const clientData = {};
-
-// ═══ UTILS ═══════════════════════════════
-const fR  = v => (v==null||isNaN(v)||v===0) ? '—' : 'R$'+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fRk = v => !v ? '—' : v>=1000 ? 'R$'+(v/1000).toFixed(1)+'k' : fR(v);
-const fN  = v => Number(v).toLocaleString('pt-BR');
-const pkey = n => n===1?'d1':n===7?'d7':n===14?'d14':'d30';
-
-function cplCls(v,bom,medio){
-  if(v==null||v===0) return 'cn';
-  if(v<=bom)   return 'cg';
-  if(v<=medio) return 'cw2';
-  return 'cr';
-}
-function hashColor(s){
-  const cols=['#e11d48','#7c3aed','#0ea5e9','#10b981','#f59e0b','#8b5cf6','#ec4899','#14b8a6'];
-  let h=0; for(let i=0;i<s.length;i++) h=s.charCodeAt(i)+((h<<5)-h);
-  return cols[Math.abs(h)%cols.length];
-}
-function initials(s){ return s.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
-
-// ═══ FETCH ═══════════════════════════════
-async function fetchCliente(c){
-  try{
-    const r = await fetch(c.url+'?t='+Date.now());
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return {ok:true, data: await r.json()};
-  }catch(e){ return {ok:false, error:e.message}; }
-}
-
-// ═══ RENDER ══════════════════════════════
-function renderGrid(){
-  const grid = document.getElementById('clientsGrid');
-  grid.innerHTML = '';
-  let totSpend=0, totLeads=0, ativos=0;
-
-  CLIENTES.forEach((c,i)=>{
-    const res = clientData[i];
-    const cor   = res?.data?.cor   || hashColor(c.nome);
-    const letra = res?.data?.letra || initials(c.nome);
-    const pk = pkey(period);
-    const card = document.createElement('div');
-    card.className = 'client-card';
-
-    // Skeleton enquanto carrega
-    if(!res){
-      card.innerHTML = `
-        <div class="client-info">
-          <div class="client-logo" style="background:${cor}">${letra}</div>
-          <div><div class="client-name">${c.nome}</div><div class="client-updated">Carregando...</div></div>
-        </div>
-        <div class="kpi-block"><div class="skel" style="width:68px"></div></div>
-        <div class="kpi-block"><div class="skel" style="width:48px"></div></div>
-        <div class="cpl-block"><div class="skel" style="width:58px"></div></div>
-        <div class="cpl-block"><div class="skel" style="width:58px"></div></div>
-        <div></div>`;
-      grid.appendChild(card);
-      return;
+{
+  "cliente": "Polvo",
+  "cor": "#7c3aed",
+  "letra": "P",
+  "atualizado": "18/04/2026",
+  "meta": {
+    "cplBom": 14,
+    "cplMedio": 20,
+    "d1": {
+      "spend": 63.28,
+      "leads": 2,
+      "cpl": 31.64
+    },
+    "d7": {
+      "spend": 414.51,
+      "leads": 18,
+      "cpl": 23.03
+    },
+    "d14": {
+      "spend": 722.13,
+      "leads": 41,
+      "cpl": 17.61
+    },
+    "d30": {
+      "spend": 1229.76,
+      "leads": 81,
+      "cpl": 15.18
     }
-
-    // Erro
-    if(!res.ok){
-      card.className += ' error';
-      card.innerHTML = `
-        <div class="client-info">
-          <div class="client-logo" style="background:${cor}">${letra}</div>
-          <div><div class="client-name">${c.nome}</div><div class="err-msg">Erro ao carregar dados</div></div>
-        </div>
-        <div class="na">—</div><div class="na">—</div>
-        <div class="na">—</div><div class="na">—</div>
-        <div><a class="link-btn" href="${c.dash}" target="_blank">Ver →</a></div>`;
-      grid.appendChild(card);
-      return;
+  },
+  "google": {
+    "ativo": false,
+    "cplBom": 10,
+    "cplMedio": 30,
+    "d1": {
+      "spend": null,
+      "leads": null,
+      "cpl": null
+    },
+    "d7": {
+      "spend": null,
+      "leads": null,
+      "cpl": null
+    },
+    "d14": {
+      "spend": null,
+      "leads": null,
+      "cpl": null
+    },
+    "d30": {
+      "spend": null,
+      "leads": null,
+      "cpl": null
     }
-
-    const d = res.data;
-    const meta   = d.meta?.[pk]   || {};
-    const google = d.google?.[pk] || {};
-    const gAtivo = d.google?.ativo;
-
-    const mSpend = meta.spend   || 0;
-    const mLeads = meta.leads   || 0;
-    const mCPL   = meta.cpl;
-    const gSpend = gAtivo ? (google.spend || 0) : 0;
-    const gLeads = gAtivo ? (google.leads || 0) : 0;
-    const gCPL   = google.cpl;
-
-    const mBom=d.meta?.cplBom,   mMedio=d.meta?.cplMedio;
-    const gBom=d.google?.cplBom, gMedio=d.google?.cplMedio;
-
-    const totC = mSpend + gSpend;
-    const totL = mLeads + gLeads;
-    if(totC>0||totL>0) ativos++;
-    totSpend += totC;
-    totLeads += totL;
-
-    card.innerHTML = `
-      <div class="client-info">
-        <div class="client-logo" style="background:${cor}">${letra}</div>
-        <div>
-          <div class="client-name">${d.cliente||c.nome}</div>
-          <div class="client-updated">Atualizado ${d.atualizado||'—'}</div>
-        </div>
-      </div>
-
-      <div class="kpi-block">
-        <div class="kpi-lbl">Invest.</div>
-        <div class="kpi-row"><span class="plat mp">f</span><span class="kpi-num">${fRk(mSpend)}</span></div>
-        ${gAtivo
-          ? `<div class="kpi-row"><span class="plat gp">G</span><span class="kpi-num">${fRk(gSpend)}</span></div>`
-          : `<div class="na">Google N/A</div>`}
-      </div>
-
-      <div class="kpi-block">
-        <div class="kpi-lbl">Leads</div>
-        <div class="kpi-row"><span class="plat mp">f</span><span class="kpi-num">${mLeads>0?fN(mLeads):'—'}</span></div>
-        ${gAtivo
-          ? `<div class="kpi-row"><span class="plat gp">G</span><span class="kpi-num">${gLeads>0?fN(gLeads):'—'}</span></div>`
-          : `<div class="na"></div>`}
-      </div>
-
-      <div class="cpl-block">
-        <div class="kpi-lbl">CPL Meta</div>
-        <div class="cpl-row">
-          <span class="plat mp">f</span>
-          <span class="cpl-val ${cplCls(mCPL,mBom,mMedio)}">${fR(mCPL)}</span>
-        </div>
-      </div>
-
-      <div class="cpl-block">
-        <div class="kpi-lbl">CPL Google</div>
-        ${gAtivo
-          ? `<div class="cpl-row">
-               <span class="plat gp">G</span>
-               <span class="cpl-val ${cplCls(gCPL,gBom,gMedio)}">${fR(gCPL)}</span>
-             </div>`
-          : `<div class="na">—</div>`}
-      </div>
-
-      <div><a class="link-btn" href="${c.dash}" target="_blank">Ver →</a></div>`;
-
-    grid.appendChild(card);
-  });
-
-  // Totais
-  document.getElementById('sumSpend').textContent  = fRk(totSpend);
-  document.getElementById('sumLeads').textContent  = fN(totLeads);
-  const cpl = totLeads>0 ? totSpend/totLeads : null;
-  document.getElementById('sumCPL').textContent    = cpl ? fR(cpl) : '—';
-  document.getElementById('sumAtivos').textContent = ativos;
-
-  const lbls = {1:'Ontem',7:'Últimos 7 dias',14:'Últimos 14 dias',30:'Últimos 30 dias'};
-  document.getElementById('footerPeriod').textContent = lbls[period];
-}
-
-// ═══ PERÍODO ════════════════════════════
-function setPeriod(n,btn){
-  period=n;
-  document.querySelectorAll('.pb').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid();
-}
-
-// ═══ TEMA ════════════════════════════════
-function toggleTheme(){
-  const dark = document.documentElement.getAttribute('data-theme')==='dark';
-  document.documentElement.setAttribute('data-theme', dark?'light':'dark');
-  document.getElementById('themeIcon').textContent  = dark?'🌙':'☀️';
-  document.getElementById('themeLabel').textContent = dark?'Escuro':'Claro';
-  localStorage.setItem('santo-theme', dark?'light':'dark');
-}
-(function(){
-  const saved = localStorage.getItem('santo-theme');
-  if(saved==='light'){
-    document.documentElement.setAttribute('data-theme','light');
-    document.addEventListener('DOMContentLoaded',()=>{
-      const ti=document.getElementById('themeIcon');
-      const tl=document.getElementById('themeLabel');
-      if(ti) ti.textContent='🌙';
-      if(tl) tl.textContent='Escuro';
-    });
   }
-})();
-
-// ═══ INIT ════════════════════════════════
-async function init(){
-  renderGrid(); // mostra esqueleto imediatamente
-  const results = await Promise.all(CLIENTES.map(fetchCliente));
-  results.forEach((r,i)=>{ clientData[i]=r; });
-  const now = new Date();
-  document.getElementById('lastSync').textContent =
-    'Sincronizado às '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  renderGrid();
 }
-init();
-</script>
-</body>
-</html>
