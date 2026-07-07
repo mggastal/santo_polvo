@@ -2,29 +2,29 @@
   "cliente": "Polvo",
   "cor": "#7c3aed",
   "letra": "P",
-  "atualizado": "06/07/2026",
+  "atualizado": "07/07/2026",
   "meta": {
     "cplBom": 14,
     "cplMedio": 20,
     "d1": {
-      "spend": 38.9,
-      "leads": 0,
-      "cpl": null
+      "spend": 60.31,
+      "leads": 1,
+      "cpl": 60.31
     },
     "d7": {
-      "spend": 213.45,
-      "leads": 3,
-      "cpl": 71.15
+      "spend": 273.25,
+      "leads": 4,
+      "cpl": 68.31
     },
     "d14": {
-      "spend": 520.27,
-      "leads": 18,
-      "cpl": 28.9
+      "spend": 543.5,
+      "leads": 17,
+      "cpl": 31.97
     },
     "d30": {
-      "spend": 1145.73,
-      "leads": 54,
-      "cpl": 21.22
+      "spend": 1174.74,
+      "leads": 51,
+      "cpl": 23.03
     }
   },
   "google": {
