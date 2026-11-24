@@ -1692,7 +1692,11 @@ function toggleAdsetRow(campId,adsetName,campName,rowEl){
   const open=sub.style.display==='none';
   sub.style.display=open?'table-row':'none';
   const arrow=rowEl.querySelector('td:first-child');
-  if(arrow) arrow.textContent=(open?'▼':'▶')+' '+adsetName;
+  if(arrow){
+    const mt=getMT();
+    const adset=mt?.adsets?.find(a=>a.n===adsetName&&a.camp===campName);
+    arrow.innerHTML=(open?'▼':'▶')+' '+statusDot(adset?.status)+adsetName;
+  }
   if(open){
     const mt=getMT();
     const ads=mt?.ads?.filter(a=>a.adset===adsetName&&a.camp===campName)||[];
