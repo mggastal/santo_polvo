@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTab">Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
@@ -32,8 +32,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .app{display:grid;grid-template-columns:210px 1fr;min-height:100vh;align-items:start;}
 .sb{background:#0f1523;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;}
 .sb-logo{display:flex;align-items:center;gap:10px;padding:20px 18px 18px;border-bottom:1px solid rgba(255,255,255,.07);}
-.logo-box{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;font-family:'Syne',sans-serif;}
-.logo-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;line-height:1.2;}
+.logo-box{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;font-family:'DM Sans',sans-serif;}
+.logo-name{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;line-height:1.2;}
 .logo-sub{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1.5px;}
 .sb-section{padding:16px 10px 4px;}
 .sb-sec-label{font-size:10px;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:2px;padding:0 8px 8px;font-weight:600;}
@@ -44,7 +44,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .sb-dot{width:5px;height:5px;border-radius:50%;margin-left:auto;}
 .period-info{padding:12px 18px;}
 .pi-label{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-.pi-val{font-family:'Syne',sans-serif;font-size:13px;color:#a78bfa;font-weight:700;}
+.pi-val{font-family:'DM Sans',sans-serif;font-size:13px;color:#a78bfa;font-weight:700;}
 .pi-dates{font-size:10px;color:rgba(255,255,255,.28);margin-top:2px;}
 .sb-footer{margin-top:auto;padding:14px 18px;border-top:1px solid rgba(255,255,255,.06);}
 .sb-footer div{font-size:10px;color:rgba(255,255,255,.25);margin-bottom:2px;}
@@ -52,7 +52,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .main{display:flex;flex-direction:column;min-height:0;}
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh);gap:12px;flex-wrap:wrap;}
 .topbar-l{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.page-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.page-title{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;}
 .live-badge{display:flex;align-items:center;gap:5px;background:#f5f3ff;border:1px solid #ddd6fe;color:#7c3aed;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}
 .pulse{width:5px;height:5px;border-radius:50%;background:#7c3aed;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -66,18 +66,18 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 15px;box-shadow:var(--sh);position:relative;overflow:hidden;}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--kc,#e2e8f0);}
 .kpi-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:4px;}
-.kpi-val{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;line-height:1;color:var(--kc,var(--text));margin-bottom:3px;}
+.kpi-val{font-family:'DM Sans',sans-serif;font-size:19px;font-weight:700;line-height:1;color:var(--kc,var(--text));margin-bottom:3px;}
 .chart-filter{display:flex;gap:5px;margin-bottom:10px;}
 .cf-btn{padding:5px 13px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
 .cf-btn.active{background:#0f1523;border-color:#0f1523;color:#fff;}
 .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--sh);min-width:0;overflow:hidden;}
-.cc-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;}
+.cc-title{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;}
 .cc-sub{font-size:11px;color:var(--muted);margin-bottom:12px;}
 .cw{position:relative;width:100%;overflow:hidden;max-width:100%;}
 .chart-main{margin-bottom:12px;}
 .chart-sub-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;min-width:0;}
 .section{margin-bottom:18px;}
-.sec-hd{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-hd{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .sec-hd span{font-size:11px;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif;}
 .stabs{display:flex;gap:5px;margin-bottom:10px;}
 .stab{padding:5px 13px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
@@ -131,7 +131,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .mes-body.open{display:block;}
 .ranking-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .rank-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;box-shadow:var(--sh);}
-.rank-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:10px;}
+.rank-title{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;margin-bottom:10px;}
 .rank-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);}
 .rank-item:last-child{border-bottom:none;}
 .rank-num{font-size:10px;color:var(--muted2);width:16px;font-weight:700;flex-shrink:0;}
@@ -171,8 +171,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
 .sb-platform-group{padding:4px 4px 0;}
 .sb-platform-hd{display:flex;align-items:center;gap:8px;padding:6px 10px 4px;margin-bottom:2px;}
-.sb-platform-icon{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;font-family:'Syne',sans-serif;flex-shrink:0;}
+.sb-platform-icon{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;font-family:'DM Sans',sans-serif;flex-shrink:0;}
 .sb-platform-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.5px;}
+.sb-platform-img{width:20px;height:20px;border-radius:5px;object-fit:contain;flex-shrink:0;}
+.dev-footer{margin:24px 0 8px;padding-top:16px;border-top:1px solid var(--border);text-align:center;}
+.dev-footer-brand{display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--muted);margin-bottom:8px;}
+.dev-footer-brand img{height:22px;width:auto;}
+.dev-footer-legal{font-size:9.5px;line-height:1.5;color:var(--muted);opacity:.8;max-width:640px;margin:0 auto;}
+.client-logo{display:none;max-width:150px;max-height:52px;width:auto;height:auto;object-fit:contain;}
+.sb-logo.has-img{justify-content:center;}
+.sb-logo.has-img .client-logo{display:block;}
+.sb-logo.has-img .logo-box,.sb-logo.has-img .logo-txt{display:none;}
 .sb-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 18px;}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -185,13 +194,14 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 <div class="app">
 <aside class="sb" id="sidebar">
   <div class="sb-logo">
+    <img class="client-logo" src="cliente.png" alt="" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
     <div class="logo-box" id="logoBox">B</div>
-    <div><div class="logo-name" id="sidebarNome"></div><div class="logo-sub">Analytics</div></div>
+    <div class="logo-txt"><div class="logo-name" id="sidebarNome"></div><div class="logo-sub">Analytics</div></div>
   </div>
   <div class="sb-section">
     <div class="sb-platform-group">
       <div class="sb-platform-hd">
-        <div class="sb-platform-icon" style="background:linear-gradient(135deg,#1877f2,#42a5f5)">f</div>
+        <img class="sb-platform-img" src="metaads.png" alt="Meta Ads">
         <span class="sb-platform-lbl">Meta Ads</span>
       </div>
       <a href="#" class="sb-item active" data-page="dash" onclick="showPage('dash',this);return false;"><span class="ico">📊</span>Diário<span class="sb-dot" style="background:#1877f2"></span></a>
@@ -199,7 +209,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     </div>
     <div class="sb-platform-group" style="margin-top:8px">
       <div class="sb-platform-hd">
-        <div class="sb-platform-icon" style="background:linear-gradient(135deg,#fbbc04,#ea4335)">G</div>
+        <img class="sb-platform-img" src="googleads.png" alt="Google Ads">
         <span class="sb-platform-lbl">Google Ads</span>
       </div>
       <a href="#" class="sb-item" data-page="gdash" onclick="showPage('gdash',this);return false;"><span class="ico">📊</span>Diário<span class="sb-dot" style="background:#fbbc04"></span></a>
@@ -210,10 +220,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="pi-label">Período ativo</div>
     <div class="pi-val" id="sbPeriod">Últimos 30 dias</div>
     <div class="pi-dates" id="sbDates"></div>
-  </div>
-  <div class="sb-footer">
-    <div>Última atualização</div>
-    <span>--/---- · via planilha</span>
   </div>
 </aside>
 <main class="main">
@@ -308,7 +314,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <!-- DADOS GERAIS PAGE -->
     <div class="page-section" id="page-geral">
       <div style="margin-bottom:16px;">
-        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;">Dados Gerais da Conta</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;">Dados Gerais da Conta</div>
         <div style="font-size:12px;color:var(--muted);" id="metaHistoricaRange">Análise histórica · dados reais da planilha</div>
       </div>
       <div class="kpi-strip" id="geralKpis"></div>
@@ -406,7 +412,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <!-- GOOGLE GERAL PAGE -->
     <div class="page-section" id="page-ggeral">
       <div style="margin-bottom:16px;">
-        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;">Google Ads — Dados Gerais</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;">Google Ads — Dados Gerais</div>
         <div style="font-size:12px;color:var(--muted);" id="googleHistoricaRange">Análise histórica · dados reais</div>
       </div>
       <div class="kpi-strip" id="gGeralKpis"></div>
@@ -457,6 +463,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="sec-hd">Ranking de Palavras-chave <span id="gGeralKwLbl">— todos os meses</span></div>
         <div class="tc" id="tGGeralKw"></div>
       </div>
+    </div>
+    <div class="dev-footer">
+      <div class="dev-footer-brand"><span>Desenvolvido por</span><img src="logo.png" alt="Santo Criativo"></div>
+      <div class="dev-footer-legal">Este relatório contém informações confidenciais e de uso exclusivo do cliente contratante. É expressamente proibida a reprodução, distribuição, divulgação ou compartilhamento, total ou parcial, deste conteúdo, incluindo dados, métricas, imagens e criativos aqui apresentados, com terceiros não autorizados, sem consentimento prévio e por escrito.</div>
     </div>
   </div>
 </main>
@@ -592,6 +602,7 @@ function setGeralQ(q,btn){
 
 function getIdxs(){
   if(mesMode){
+    if(DAILY.ym) return DAILY.ym.map((m,i)=>m===mesMode?i:-1).filter(i=>i>=0);
     const ds=MES_DAYS[mesMode]||[];
     return DAILY.days.map((d,i)=>ds.includes(d)?i:-1).filter(i=>i>=0);
   }
@@ -1128,6 +1139,7 @@ function toggleLabelsGG(checked){gShowLabelsGG=checked;renderGGeral();}
 
 function getGIdxs(){
   if(gMesMode){
+    if(GDAILY.ym) return GDAILY.ym.map((m,i)=>m===gMesMode?i:-1).filter(i=>i>=0);
     const ds=GMES_DAYS[gMesMode]||[];
     return GDAILY.days.map((d,i)=>ds.includes(d)?i:-1).filter(i=>i>=0);
   }

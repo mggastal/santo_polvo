@@ -147,18 +147,28 @@ def load_meta():
     return df
 
 
+def _fill_days(agg):
+    """Completa dias sem veiculação com zero: assim "últimos N dias" no gráfico
+    cobre os mesmos N dias de calendário que os KPIs."""
+    if agg.empty: return agg
+    rng = pd.date_range(agg["date"].min(), agg["date"].max())
+    return agg.set_index("date").reindex(rng, fill_value=0).rename_axis("date").reset_index()
+
+
 def meta_daily(df):
     agg = df.groupby("date").agg(
         spend=("spend","sum"), leads=("leads","sum"),
         impressions=("impressions","sum"), link_clicks=("link_clicks","sum")
     ).reset_index().sort_values("date")
-    out = {k: [] for k in ["days","spend","leads","cpl","ctr","cpm"]}
+    agg = _fill_days(agg)
+    out = {k: [] for k in ["days","ym","spend","leads","cpl","ctr","cpm"]}
     for _, r in agg.iterrows():
         ts = round(float(r["spend"]), 2)
         tl = int(r["leads"])
         imp = float(r["impressions"])
         lc  = float(r["link_clicks"])
         out["days"].append(r["date"].strftime("%d/%m"))
+        out["ym"].append(r["date"].strftime("%Y-%m"))
         out["spend"].append(ts)
         out["leads"].append(tl)
         out["cpl"].append(round(ts/tl, 2) if tl > 0 else None)
@@ -422,13 +432,15 @@ def google_daily(df):
         spend=("spend","sum"), conversions=("conversions","sum"),
         clicks=("clicks","sum"), impressions=("impressions","sum")
     ).reset_index().sort_values("date")
-    out = {k: [] for k in ["days","spend","conversions","cpl","ctr","cpc"]}
+    agg = _fill_days(agg)
+    out = {k: [] for k in ["days","ym","spend","conversions","cpl","ctr","cpc"]}
     for _, r in agg.iterrows():
         ts   = round(float(r["spend"]), 2)
         conv = round(float(r["conversions"]), 2)
         cl   = int(r["clicks"])
         imp  = int(r["impressions"])
         out["days"].append(r["date"].strftime("%d/%m"))
+        out["ym"].append(r["date"].strftime("%Y-%m"))
         out["spend"].append(ts)
         out["conversions"].append(conv)
         out["cpl"].append(round(ts/conv, 2) if conv > 0 else None)
@@ -704,8 +716,6 @@ def inject_all(template_path,
     html = re.sub(r"const NOME_CLIENTE='[^']*'", f"const NOME_CLIENTE='{NOME_CLIENTE}'",html, count=1)
 
     html = re.sub(r"Dados até \d{2}/\d{2}", f"Dados até {meta_last}", html)
-    today = date.today().strftime("%d/%m/%Y")
-    html = re.sub(r"\d{2}/\d{2}/\d{4} · via planilha", f"{today} · via planilha", html)
 
     return html
 

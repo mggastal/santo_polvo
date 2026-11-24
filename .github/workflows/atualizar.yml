@@ -2,7 +2,7 @@ name: Atualizar Dashboard
 
 on:
   schedule:
-    - cron: '0 9 * * *'   # 06:00 Brasília = 09:00 UTC
+    - cron: '23 * * * *'  # de hora em hora (o horário fixo das 09:00 UTC atrasava até 12h no GitHub)
   workflow_dispatch:        # botão para rodar manualmente também
 
 jobs:
