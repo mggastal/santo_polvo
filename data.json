@@ -4,8 +4,8 @@
   "letra": "P",
   "atualizado": "24/11/2026",
   "meta": {
-    "cplBom": 14,
-    "cplMedio": 20,
+    "cplBom": 14.0,
+    "cplMedio": 20.0,
     "d1": {
       "spend": 57.66,
       "leads": 2,
@@ -28,28 +28,6 @@
     }
   },
   "google": {
-    "ativo": false,
-    "cplBom": 10,
-    "cplMedio": 30,
-    "d1": {
-      "spend": null,
-      "leads": null,
-      "cpl": null
-    },
-    "d7": {
-      "spend": null,
-      "leads": null,
-      "cpl": null
-    },
-    "d14": {
-      "spend": null,
-      "leads": null,
-      "cpl": null
-    },
-    "d30": {
-      "spend": null,
-      "leads": null,
-      "cpl": null
-    }
+    "ativo": false
   }
 }
