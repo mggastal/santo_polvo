@@ -7,24 +7,24 @@
     "cplBom": 14.0,
     "cplMedio": 20.0,
     "d1": {
-      "spend": 46.38,
-      "leads": 3,
-      "cpl": 15.46
+      "spend": 34.53,
+      "leads": 0,
+      "cpl": null
     },
     "d7": {
-      "spend": 281.48,
-      "leads": 13,
-      "cpl": 21.65
+      "spend": 281.9,
+      "leads": 10,
+      "cpl": 28.19
     },
     "d14": {
-      "spend": 564.17,
-      "leads": 36,
-      "cpl": 15.67
+      "spend": 560.2,
+      "leads": 31,
+      "cpl": 18.07
     },
     "d30": {
-      "spend": 1247.49,
-      "leads": 84,
-      "cpl": 14.85
+      "spend": 1242.18,
+      "leads": 80,
+      "cpl": 15.53
     }
   },
   "google": {
